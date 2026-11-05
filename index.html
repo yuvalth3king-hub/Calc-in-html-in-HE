@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<head>
+    <title>
+        calc
+    </title>
+    <style>
+    .num1 {
+        color: darkblue;
+        background-color: lightblue;
+        position: relative;
+        left: 100px;
+        top: 30px;
+        text-align: center;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        mrgin-top: 47px;
+    }
+    body {
+        background-color: #6197DE;
+    }
+    h1 {
+        position: absulote;
+        left: 50px;
+        top: 20px;
+        right: 5ppx;
+        text-align: center
+    }
+    .num2 {
+        background-color: lightblue;
+        position: relative;
+        color: darkblue;
+        text-align: center;
+        position: absulote;
+        top: 50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+        margin-top: 50px;
+    }
+    .option {
+        background-color: lightblue;
+        border: 10px;
+        border-radius: 15px;
+        padding: 30p;
+        font-size: 20px;
+        position: flex;
+        top: 50%;
+        left 50%;
+        margin-top: 55px;
+        
+    }
+    </style>
+</head>
+<body>
+    <h1 class="title">מחשבון</h1>
+    <input type="number" id="num1" class="num1" placeholder="הכנס מספר ראשון">
+    <input type="number" id="num2" class="num2" placeholder="הכנס מספר שני">
+    <br><br>
+    <button class="option" onclick="calculate ('+')">+</button>
+    <button class="option" onclick="calculate ('-')">-</button>
+    <button class="option" onclick="calculate ('*')">*</button>
+    <button class="option" onclick="calculate ('/')">/</button>
+    <h2 id="result">תוצאה:</h2>
+    <script>
+    function calculate(operator) {
+        let num1 =
+Number(document.getElementById("num1").value);
+        let num2 =
+        Number(document.getElementById("num2").value);
+        if (num1 == "" || num2 == "") {
+            alert("Error, not enough info typed.")
+            return;
+        }
+        let result;
+        if (operator == "+") {
+            result = num1 + num2
+        }
+        else if (operator == "-") {
+            result = num1 - num2
+        }
+        else if (operator == "/") {
+            result = num1 / num2
+        }
+        else if (operator == "*") {
+            result = num1 * num2
+        }
+        document.getElementById("result").innerText = "תוצאה:" + result;
+    }
+    </script>
+</body>
