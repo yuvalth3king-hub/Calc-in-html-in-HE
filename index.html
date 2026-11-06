@@ -1,90 +1,195 @@
+
 <!DOCTYPE html>
+<html lang="he">
 <head>
-    <title>
-        calc
-    </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calc</title>
+
     <style>
-    .num1 {
-        color: darkblue;
-        background-color: lightblue;
-        position: relative;
-        left: 100px;
-        top: 30px;
-        text-align: center;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        mrgin-top: 47px;
-    }
-    body {
-        background-color: #6197DE;
-    }
-    h1 {
-        position: absulote;
-        left: 50px;
-        top: 20px;
-        right: 5ppx;
-        text-align: center
-    }
-    .num2 {
-        background-color: lightblue;
-        position: relative;
-        color: darkblue;
-        text-align: center;
-        position: absulote;
-        top: 50%;
-        left:50%;
-        transform: translate(-50%, -50%);
-        margin-top: 50px;
-    }
-    .option {
-        background-color: lightblue;
-        border: 10px;
-        border-radius: 15px;
-        padding: 30p;
-        font-size: 20px;
-        position: flex;
-        top: 50%;
-        left 50%;
-        margin-top: 55px;
-        
-    }
+        body {
+            background-color: #A7C7E7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #17365D;
+        }
+
+        input::placeholder {
+            color: darkblue;
+        }
+
+        .num1, .num2 {
+            color: #17365D;
+            background-color: #EAF4FC;
+            text-align: center;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            margin-top: 15px;
+            width: 220px;
+            box-sizing: border-box;
+        }
+
+        .option {
+            color: white;
+            background-color: #3475C5;
+            border: none;
+            border-radius: 15px;
+            padding: 20px;
+            font-size: 20px;
+            margin: 10px;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            background-color: #24558A;
+        }
+
+        .welcome {
+            background-color: #F8F5EC;
+            padding: 30px;
+            border-radius: 18px;
+            text-align: center;
+            margin-top: 50px;
+            color: #24558A;
+        }
+
+        .welcome p {
+            margin-bottom: 12px;
+        }
+
+        .welcome button {
+            background-color: #3475C5;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            padding: 10px 22px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 160px;
+        }
+
+        #result {
+            color: #17365D;
+        }
+
+        #calculator {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .reset {
+            background-color: #F8F5EC;
+            color: #24558A;
+            border: none;
+            border-radius: 9px;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
+
 <body>
-    <h1 class="title">מחשבון</h1>
-    <input type="number" id="num1" class="num1" placeholder="הכנס מספר ראשון">
-    <input type="number" id="num2" class="num2" placeholder="הכנס מספר שני">
-    <br><br>
-    <button class="option" onclick="calculate ('+')">+</button>
-    <button class="option" onclick="calculate ('-')">-</button>
-    <button class="option" onclick="calculate ('*')">*</button>
-    <button class="option" onclick="calculate ('/')">/</button>
-    <h2 id="result">תוצאה:</h2>
+
+    <div class="welcome">
+        <h2>שלום!</h2>
+        <p>ברוכים הבאים למחשבון!</p>
+        <button onclick="startCalc()">התחלה!</button>
+    </div>
+
+    <div id="calculator">
+
+        <h1>מחשבון</h1>
+
+        <input type="number" id="num1" class="num1"
+        placeholder="הכנס מספר ראשון">
+
+        <input type="number" id="num2" class="num2"
+        placeholder="הכנס מספר שני">
+
+        <div class="buttons">
+            <button class="option" onclick="calculate('+')">+</button>
+            <button class="option" onclick="calculate('-')">-</button>
+            <button class="option" onclick="calculate('*')">*</button>
+            <button class="option" onclick="calculate('/')">/</button>
+        </div>
+
+        <h2 id="result">תוצאה:</h2>
+
+        <button class="reset" onclick="resetCalc()">איפוס</button>
+
+    </div>
+
     <script>
-    function calculate(operator) {
-        let num1 =
-Number(document.getElementById("num1").value);
-        let num2 =
-        Number(document.getElementById("num2").value);
-        if (num1 == "" || num2 == "") {
-            alert("Error, not enough info typed.")
-            return;
+
+        function startCalc() {
+            document.querySelector(".welcome").style.display = "none";
+            document.getElementById("calculator").style.display = "flex";
         }
-        let result;
-        if (operator == "+") {
-            result = num1 + num2
+
+        function calculate(operator) {
+
+            let value1 = document.getElementById("num1").value;
+            let value2 = document.getElementById("num2").value;
+
+            if (value1 === "" || value2 === "") {
+                alert("Error, not enough info typed.");
+                return;
+            }
+
+            let num1 = Number(value1);
+            let num2 = Number(value2);
+
+            if (operator === "/" && num2 === 0) {
+                alert("Can't divide by zero!");
+                return;
+            }
+
+            let result;
+
+            if (operator === "+") {
+                result = num1 + num2;
+            }
+
+            else if (operator === "-") {
+                result = num1 - num2;
+            }
+
+            else if (operator === "*") {
+                result = num1 * num2;
+            }
+
+            else if (operator === "/") {
+                result = num1 / num2;
+            }
+
+            document.getElementById("result").innerText =
+            "תוצאה: " + result;
         }
-        else if (operator == "-") {
-            result = num1 - num2
+
+        function resetCalc() {
+            document.getElementById("num1").value = "";
+            document.getElementById("num2").value = "";
+            document.getElementById("result").innerText = "תוצאה:";
         }
-        else if (operator == "/") {
-            result = num1 / num2
-        }
-        else if (operator == "*") {
-            result = num1 * num2
-        }
-        document.getElementById("result").innerText = "תוצאה:" + result;
-    }
+
     </script>
+
 </body>
+</html>
