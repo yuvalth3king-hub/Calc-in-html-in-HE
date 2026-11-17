@@ -198,6 +198,20 @@ if ("serviceWorker" in navigator) {
   });
 }
     </script>
-
+    <script>
+fetch("https://website-security.yuvalth3king.workers.dev/visit", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    page: window.location.pathname,
+    browser: navigator.userAgent
+  })
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error(error));
+    </script>
 </body>
 </html>
