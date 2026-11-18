@@ -199,19 +199,12 @@ if ("serviceWorker" in navigator) {
 }
     </script>
     <script>
-fetch("https://website-security.yuvalth3king.workers.dev/visit", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    page: window.location.pathname,
-    browser: navigator.userAgent
-  })
+        fetch("https://website-security.yuvalth3king.workers.dev/", {
+    method: "POST"
 })
-.then(response => response.json())
+.then(response => response.text())
 .then(data => console.log(data))
-.catch(error => console.error(error));
+.catch(error => console.log(error));
     </script>
 </body>
 </html>
